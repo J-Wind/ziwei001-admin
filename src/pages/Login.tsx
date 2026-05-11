@@ -2,13 +2,15 @@ import { useState } from 'react'
 import { Button, Form, Input, message } from 'antd'
 import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
-import { config } from '../config/environment'
 import './Login.css'
+
+const API_BASE = 'http://localhost:3001'
 
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
+  // 已登录自动跳转
   if (localStorage.getItem('admin-token')) {
     navigate('/')
   }
@@ -16,7 +18,7 @@ const Login: React.FC = () => {
   const onFinish = async (values: { username: string; password: string }) => {
     setLoading(true)
     try {
-      const res = await fetch(`${config.apiBaseUrl}/api/auth/login`, {
+      const res = await fetch(`${API_BASE}/api/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ phone: values.username, password: values.password }),

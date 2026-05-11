@@ -1,6 +1,4 @@
-import { config } from './config/environment'
-
-const API_BASE = config.apiBaseUrl
+const API_BASE = 'http://localhost:3001'
 
 function getToken() {
   return localStorage.getItem('admin-token') || ''
