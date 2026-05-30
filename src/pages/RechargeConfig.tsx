@@ -152,16 +152,18 @@ const RechargeConfigPage: React.FC = () => {
       title: '操作',
       key: 'action',
       width: 80,
-      render (_: any, __: RechargePackage, index: number) => (
-        <Popconfirm
-          title="确定删除此套餐？"
-          onConfirm={() => handleRemovePackage(index)}
-          okText="删除"
-          cancelText="取消"
-        >
-          <Button type="link" danger size="small">删除</Button>
-        </Popconfirm>
-      )
+      render: (record: any, rowData: RechargePackage, index: number) => {
+        return (
+          <Popconfirm
+            title="确定删除此套餐？"
+            onConfirm={() => handleRemovePackage(index)}
+            okText="删除"
+            cancelText="取消"
+          >
+            <Button type="link" danger size="small">删除</Button>
+          </Popconfirm>
+        )
+      }
     }
   ]
 
