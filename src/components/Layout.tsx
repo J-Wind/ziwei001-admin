@@ -13,6 +13,7 @@ import {
   TeamOutlined,
   SafetyOutlined,
   WalletOutlined,
+  ShoppingOutlined,
 } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import './Layout.css'
@@ -39,6 +40,7 @@ const LayoutComponent: React.FC = () => {
     { key: '/system-config', icon: <SettingOutlined />, label: '系统配置', onClick: () => navigate('/system-config') },
     { key: '/redeem-code', icon: <GiftOutlined />, label: '兑换码', onClick: () => navigate('/redeem-code') },
     { key: '/recharge-audit', icon: <WalletOutlined />, label: '充值审核', onClick: () => navigate('/recharge-audit') },
+    { key: '/recharge-config', icon: <ShoppingOutlined />, label: '充值套餐', onClick: () => navigate('/recharge-config') },
     { key: '/points-config', icon: <DollarOutlined />, label: '积分配置', onClick: () => navigate('/points-config') },
   ]
 
