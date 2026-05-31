@@ -286,7 +286,7 @@ const UsersPage: React.FC = () => {
           pageSizeOptions: ['10', '20', '50', '100'],
         }}
         size="small"
-        scroll={{ x: 1200 }}
+        scroll={{ x: 'max-content' }}
       />
 
       {/* 创建用户 */}

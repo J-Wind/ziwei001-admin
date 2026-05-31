@@ -50,7 +50,7 @@ const Login: React.FC = () => {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo-icon">
-            <img src="/logo.svg" alt="Logo" style={{ width: '64px', height: '64px' }} />
+            <img src="/logo-transparent.png" alt="紫微卜运 Logo" />
           </div>
           <h1>紫微卜运</h1>
           <p className="login-subtitle">AI 命理工具 · 管理后台</p>
@@ -59,11 +59,12 @@ const Login: React.FC = () => {
 
         <Form name="login" onFinish={onFinish} initialValues={{ remember: true }} className="login-form">
           <Form.Item name="username" rules={[{ required: true, message: '请输入用户名' }]}>
-            <Input 
-              prefix={<UserOutlined className="input-prefix-icon" />} 
-              placeholder="管理员用户名" 
+            <Input
+              prefix={<UserOutlined className="input-prefix-icon" />}
+              placeholder="管理员用户名"
               size="large"
               className="login-input"
+              maxLength={11}
             />
           </Form.Item>
           

@@ -208,6 +208,7 @@ const RolesPage: React.FC = () => {
         rowKey="id"
         loading={loading}
         size="small"
+        scroll={{ x: 'max-content' }}
         pagination={false}
       />
 

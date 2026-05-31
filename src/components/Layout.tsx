@@ -68,7 +68,7 @@ const LayoutComponent: React.FC = () => {
       >
         <div className="logo-container">
           <div className="logo-icon">
-            <img src="/logo.svg" alt="Logo" style={{ width: '40px', height: '40px' }} />
+            <img src="/logo-transparent.png" alt="Logo" style={{ width: '50px', height: '50px' }} />
           </div>
           {!collapsed && (
             <div className="logo-text">

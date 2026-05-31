@@ -19,6 +19,7 @@ const { RangePicker } = DatePicker
 
 interface RechargeOrder {
   id: number
+  order_no: string
   user_id: number
   username: string
   amount: number
@@ -164,6 +165,16 @@ const RechargeOrdersPage: React.FC = () => {
       dataIndex: 'id',
       key: 'id',
       width: 80,
+    },
+    {
+      title: '订单号',
+      dataIndex: 'order_no',
+      key: 'order_no',
+      width: 180,
+      ellipsis: true,
+      render: (text: string) => (
+        <span style={{ fontFamily: 'monospace', fontSize: '13px' }}>{text}</span>
+      ),
     },
     {
       title: '用户',
@@ -322,6 +333,7 @@ const RechargeOrdersPage: React.FC = () => {
         dataSource={orders}
         rowKey="id"
         loading={loading}
+        scroll={{ x: 'max-content' }}
         pagination={{
           ...pagination,
           total,
@@ -343,6 +355,7 @@ const RechargeOrdersPage: React.FC = () => {
         {currentOrder && (
           <div>
             <p><strong>订单ID：</strong>{currentOrder.id}</p>
+            <p><strong>订单号：</strong>{currentOrder.order_no}</p>
             <p><strong>用户：</strong>{currentOrder.username} (ID: {currentOrder.user_id})</p>
             <p><strong>金额：</strong>¥{currentOrder.amount}</p>
             <p><strong>积分：</strong>{currentOrder.points}</p>

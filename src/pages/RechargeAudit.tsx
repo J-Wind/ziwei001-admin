@@ -200,6 +200,7 @@ const RechargeAuditPage: React.FC = () => {
         dataSource={orders}
         rowKey="id"
         loading={loading}
+        scroll={{ x: 'max-content' }}
         pagination={{
           total,
           showSizeChanger: true,

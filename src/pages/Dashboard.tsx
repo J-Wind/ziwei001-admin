@@ -17,8 +17,8 @@ import './Dashboard.css'
 interface DashboardStats {
   apiCalls: number
   userCount: number
-  activeModels: number
-  activeCodes: number
+  todayNewUsers: number
+  totalRecharge: number
   systemStatus: string
 }
 
@@ -28,8 +28,8 @@ const Dashboard: React.FC = () => {
   const [stats, setStats] = useState<DashboardStats>({
     apiCalls: 0,
     userCount: 0,
-    activeModels: 0,
-    activeCodes: 0,
+    todayNewUsers: 0,
+    totalRecharge: 0,
     systemStatus: '检测中...',
   })
   const navigate = useNavigate()
@@ -169,19 +169,19 @@ const Dashboard: React.FC = () => {
               <Card className="stat-card stat-card-orange" hoverable>
                 <div className="stat-card-content">
                   <div className="stat-icon-wrapper stat-icon-orange">
-                    <BarChartOutlined />
+                    <UserOutlined />
                   </div>
                   <div className="stat-info">
                     <div className="stat-value">
                       <Statistic
-                        title="活跃模型"
-                        value={formatValue(stats.activeModels)}
+                        title="当天新增用户"
+                        value={formatValue(stats.todayNewUsers || 0)}
                         valueStyle={{ color: '#f5c842', fontSize: '28px', fontWeight: 600 }}
                       />
                     </div>
                     <div className="stat-trend">
-                      <Tag color="warning">正常</Tag>
-                      <span className="trend-desc">运行状态</span>
+                      <Tag color="warning">今日</Tag>
+                      <span className="trend-desc">新增注册</span>
                     </div>
                   </div>
                 </div>
@@ -192,19 +192,21 @@ const Dashboard: React.FC = () => {
               <Card className="stat-card stat-card-purple" hoverable>
                 <div className="stat-card-content">
                   <div className="stat-icon-wrapper stat-icon-purple">
-                    <GiftOutlined />
+                    <BarChartOutlined />
                   </div>
                   <div className="stat-info">
                     <div className="stat-value">
                       <Statistic
-                        title="可用兑换码"
-                        value={formatValue(stats.activeCodes)}
+                        title="用户充值总额"
+                        value={formatValue(stats.totalRecharge || 0)}
+                        prefix="¥"
+                        precision={2}
                         valueStyle={{ color: '#722ed1', fontSize: '28px', fontWeight: 600 }}
                       />
                     </div>
                     <div className="stat-trend">
-                      <Tag color="purple">可用</Tag>
-                      <span className="trend-desc">库存状态</span>
+                      <Tag color="purple">累计</Tag>
+                      <span className="trend-desc">充值金额</span>
                     </div>
                   </div>
                 </div>

@@ -182,6 +182,7 @@ const RechargeConfigPage: React.FC = () => {
           pagination={false}
           loading={loading}
           size="small"
+          scroll={{ x: 'max-content' }}
           bordered
         />
 

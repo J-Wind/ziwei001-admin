@@ -174,7 +174,7 @@ const RedeemCodePage: React.FC = () => {
         { key: 'expired', label: '已过期' },
       ]} />
 
-      <Table dataSource={codes} columns={columns} rowKey="id" loading={loading} size="small" />
+      <Table dataSource={codes} columns={columns} rowKey="id" loading={loading} size="small" scroll={{ x: 'max-content' }} />
 
       <Modal open={showModal} onCancel={() => setShowModal(false)} title="生成兑换码" footer={null}>
         <Form onFinish={handleGenerate} layout="vertical" initialValues={{ count: 10, points: 100 }}>

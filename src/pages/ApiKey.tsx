@@ -208,6 +208,7 @@ const ApiKey: React.FC = () => {
         rowKey="id"
         pagination={false}
         loading={loading}
+        scroll={{ x: 'max-content' }}
       />
 
       <Modal
