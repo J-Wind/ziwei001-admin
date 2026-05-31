@@ -130,7 +130,7 @@ const Dashboard: React.FC = () => {
                       <Statistic
                         title="AI 调用次数"
                         value={formatValue(stats.apiCalls)}
-                        valueStyle={{ color: '#1890ff', fontSize: '28px', fontWeight: 600 }}
+                        valueStyle={{ color: '#722ed1', fontSize: '28px', fontWeight: 600 }}
                       />
                     </div>
                     <div className="stat-trend trend-up">
@@ -176,7 +176,7 @@ const Dashboard: React.FC = () => {
                       <Statistic
                         title="活跃模型"
                         value={formatValue(stats.activeModels)}
-                        valueStyle={{ color: '#faad14', fontSize: '28px', fontWeight: 600 }}
+                        valueStyle={{ color: '#f5c842', fontSize: '28px', fontWeight: 600 }}
                       />
                     </div>
                     <div className="stat-trend">

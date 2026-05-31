@@ -49,7 +49,9 @@ const Login: React.FC = () => {
       
       <div className="login-card">
         <div className="login-header">
-          <div className="login-logo-icon">⭐</div>
+          <div className="login-logo-icon">
+            <img src="/logo.svg" alt="Logo" style={{ width: '64px', height: '64px' }} />
+          </div>
           <h1>紫微卜运</h1>
           <p className="login-subtitle">AI 命理工具 · 管理后台</p>
           <div className="golden-line"></div>

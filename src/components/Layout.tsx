@@ -68,7 +68,7 @@ const LayoutComponent: React.FC = () => {
       >
         <div className="logo-container">
           <div className="logo-icon">
-            <StarFilled />
+            <img src="/logo.svg" alt="Logo" style={{ width: '40px', height: '40px' }} />
           </div>
           {!collapsed && (
             <div className="logo-text">
@@ -96,11 +96,11 @@ const LayoutComponent: React.FC = () => {
           <Space className="header-right">
             <Dropdown menu={{ items: dropdownMenu }} placement="bottomRight">
               <div className="user-avatar-wrapper">
-                <Avatar 
-                  size={36} 
+                <Avatar
+                  size={36}
                   icon={<UserOutlined />}
                   className="user-avatar"
-                  style={{ background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)' }}
+                  style={{ background: 'linear-gradient(135deg, #722ed1 0%, #531dab 100%)' }}
                 />
                 <span className="username">{adminUser?.username || '管理员'}</span>
               </div>
