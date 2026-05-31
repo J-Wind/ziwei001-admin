@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Layout, Menu, Button, Dropdown, Space } from 'antd'
+import { Layout, Menu, Button, Dropdown, Space, Avatar } from 'antd'
 import {
   HomeOutlined,
   KeyOutlined,
@@ -15,6 +15,7 @@ import {
   WalletOutlined,
   ShoppingOutlined,
   OrderedListOutlined,
+  StarFilled,
 } from '@ant-design/icons'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import './Layout.css'
@@ -57,27 +58,56 @@ const LayoutComponent: React.FC = () => {
   const selectedKey = menuItems.find(m => location.pathname === m.key)?.key || '/'
 
   return (
-    <Layout style={{ minHeight: '100vh' }}>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="logo">
-          <h2 style={{ color: 'white', textAlign: 'center', marginTop: 16 }}>
-            紫微卜运
-          </h2>
+    <Layout className="main-layout" style={{ minHeight: '100vh' }}>
+      <Sider 
+        trigger={null} 
+        collapsible 
+        collapsed={collapsed}
+        className="sidebar"
+        width={240}
+      >
+        <div className="logo-container">
+          <div className="logo-icon">
+            <StarFilled />
+          </div>
+          {!collapsed && (
+            <div className="logo-text">
+              <h2>紫微卜运</h2>
+              <span className="logo-subtitle">AI 命理工具</span>
+            </div>
+          )}
         </div>
-        <Menu theme="dark" mode="inline" selectedKeys={[selectedKey]} items={menuItems} />
+        <Menu 
+          theme="dark" 
+          mode="inline" 
+          selectedKeys={[selectedKey]} 
+          items={menuItems}
+          className="sidebar-menu"
+        />
       </Sider>
       <Layout className="site-layout">
-        <Header className="site-layout-background" style={{ padding: 0, display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingRight: 24 }}>
-          <Button type="text" icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} onClick={() => setCollapsed(!collapsed)} style={{ fontSize: 16, width: 64, height: 64 }} />
-          <Space>
-            <Dropdown menu={{ items: dropdownMenu }}>
-              <Button type="text" icon={<UserOutlined />}>
-                {adminUser?.username || '管理员'}
-              </Button>
+        <Header className="site-header">
+          <Button 
+            type="text" 
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />} 
+            onClick={() => setCollapsed(!collapsed)} 
+            className="collapse-btn"
+          />
+          <Space className="header-right">
+            <Dropdown menu={{ items: dropdownMenu }} placement="bottomRight">
+              <div className="user-avatar-wrapper">
+                <Avatar 
+                  size={36} 
+                  icon={<UserOutlined />}
+                  className="user-avatar"
+                  style={{ background: 'linear-gradient(135deg, #1890ff 0%, #096dd9 100%)' }}
+                />
+                <span className="username">{adminUser?.username || '管理员'}</span>
+              </div>
             </Dropdown>
           </Space>
         </Header>
-        <Content className="site-layout-background" style={{ margin: '24px 16px', padding: 24, minHeight: 280, background: 'white', borderRadius: 8 }}>
+        <Content className="site-content">
           <Outlet />
         </Content>
       </Layout>
