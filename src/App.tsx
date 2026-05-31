@@ -14,6 +14,7 @@ import Users from './pages/Users'
 import Roles from './pages/Roles'
 import RechargeAudit from './pages/RechargeAudit'
 import RechargeConfig from './pages/RechargeConfig'
+import RechargeOrders from './pages/RechargeOrders'
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
   const token = localStorage.getItem('admin-token')
@@ -37,6 +38,7 @@ function App() {
             <Route path="roles" element={<Roles />} />
             <Route path="recharge-audit" element={<RechargeAudit />} />
             <Route path="recharge-config" element={<RechargeConfig />} />
+            <Route path="recharge-orders" element={<RechargeOrders />} />
           </Route>
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

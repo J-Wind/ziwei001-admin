@@ -4,7 +4,7 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 
-const API_BASE = 'http://localhost:3001'
+const API_BASE = import.meta.env?.VITE_API_BASE || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '')
 
 const Login: React.FC = () => {
   const [loading, setLoading] = useState(false)
