@@ -9,6 +9,16 @@ import {
 } from '@ant-design/icons'
 import { adminRequest } from '../api'
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+
+// 启用 UTC 插件
+dayjs.extend(utc)
+
+/** 格式化为北京时间 (UTC+8) */
+const formatBJTime = (t: string | null | undefined, format = 'YYYY-MM-DD HH:mm:ss'): string => {
+  if (!t) return ''
+  return dayjs.utc(t).utcOffset(8).format(format)
+}
 
 const { Option } = Select
 
@@ -226,11 +236,11 @@ const UsersPage: React.FC = () => {
     },
     {
       title: '最近登录', dataIndex: 'last_login_at', key: 'last_login_at', width: 150,
-      render: (t: string | null) => t ? dayjs(t).format('YYYY-MM-DD HH:mm') : '未登录',
+      render: (t: string | null) => t ? formatBJTime(t, 'YYYY-MM-DD HH:mm') : '未登录',
     },
     {
       title: '注册时间', dataIndex: 'created_at', key: 'created_at', width: 150,
-      render: (t: string) => t?.slice(0, 19),
+      render: (t: string) => formatBJTime(t),
     },
     {
       title: '操作', key: 'actions', width: 260, fixed: 'right' as const,
@@ -384,7 +394,7 @@ const UsersPage: React.FC = () => {
                     {detailUser.status === 'active' ? '启用' : '禁用'}
                   </Tag>
                 </Descriptions.Item>
-                <Descriptions.Item label="注册时间">{detailUser.created_at?.slice(0, 19)}</Descriptions.Item>
+                <Descriptions.Item label="注册时间">{formatBJTime(detailUser.created_at)}</Descriptions.Item>
               </Descriptions>
 
               <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
@@ -413,7 +423,7 @@ const UsersPage: React.FC = () => {
                   children: (
                     <Table dataSource={detailPointsLog} rowKey="id" size="small" pagination={{ pageSize: 10 }}
                       columns={[
-                        { title: '时间', dataIndex: 'created_at', width: 170, render: (t: string) => t?.slice(0, 19) },
+                        { title: '时间', dataIndex: 'created_at', width: 170, render: (t: string) => formatBJTime(t) },
                         { title: '类型', dataIndex: 'type', width: 120, render: (t: string) => <Tag color={statusColor(t)}>{t}</Tag> },
                         { title: '积分变动', dataIndex: 'amount', width: 100, render: (v: number) => <span style={{ color: v > 0 ? '#52c41a' : '#ff4d4f', fontWeight: 'bold' }}>{v > 0 ? '+' : ''}{v}</span> },
                         { title: '说明', dataIndex: 'description', ellipsis: true },
@@ -427,7 +437,7 @@ const UsersPage: React.FC = () => {
                   children: (
                     <Table dataSource={detailOpLog} rowKey="id" size="small" pagination={{ pageSize: 10 }}
                       columns={[
-                        { title: '时间', dataIndex: 'created_at', width: 170, render: (t: string) => t?.slice(0, 19) },
+                        { title: '时间', dataIndex: 'created_at', width: 170, render: (t: string) => formatBJTime(t) },
                         { title: '操作', dataIndex: 'action', width: 160 },
                         { title: '详情', dataIndex: 'detail', ellipsis: true },
                         { title: 'IP', dataIndex: 'ip', width: 130 },

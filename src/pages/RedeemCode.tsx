@@ -2,6 +2,16 @@ import { useState, useEffect } from 'react'
 import { Button, Table, InputNumber, Modal, Form, message, Popconfirm, Tag, Tabs, Space } from 'antd'
 import { PlusOutlined, DeleteOutlined, CopyOutlined } from '@ant-design/icons'
 import { adminRequest } from '../api'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+
+dayjs.extend(utc)
+
+/** 格式化为北京时间 (UTC+8) */
+const formatBJTime = (t: string | null | undefined, format = 'YYYY-MM-DD HH:mm:ss'): string => {
+  if (!t) return ''
+  return dayjs.utc(t).utcOffset(8).format(format)
+}
 
 interface RedeemCode {
   id: number
@@ -125,11 +135,11 @@ const RedeemCodePage: React.FC = () => {
     { title: '创建者', dataIndex: 'created_by', key: 'created_by', width: 100 },
     {
       title: '创建时间', dataIndex: 'created_at', key: 'created_at', width: 160,
-      render: (t: string) => t?.slice(0, 19),
+      render: (t: string) => formatBJTime(t),
     },
     {
       title: '有效期至', dataIndex: 'expires_at', key: 'expires_at', width: 160,
-      render: (t: string | null) => t ? t.slice(0, 19) : '永久',
+      render: (t: string | null) => t ? formatBJTime(t) : '永久',
     },
     {
       title: '使用者', key: 'used_by', width: 100,
@@ -137,7 +147,7 @@ const RedeemCodePage: React.FC = () => {
     },
     {
       title: '使用时间', key: 'used_at', width: 160,
-      render: (_: any, r: RedeemCode) => r.used_at ? r.used_at.slice(0, 19) : '-',
+      render: (_: any, r: RedeemCode) => r.used_at ? formatBJTime(r.used_at) : '-',
     },
     {
       title: '操作', key: 'actions', width: 80,

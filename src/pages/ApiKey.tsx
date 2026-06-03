@@ -2,6 +2,16 @@ import { useState, useEffect } from 'react';
 import { Button, Table, Form, Input, Modal, message, Popconfirm, Switch, Select } from 'antd';
 import { EditOutlined, DeleteOutlined, PlusOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
 import { adminRequest } from '../api';
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+
+dayjs.extend(utc)
+
+/** 格式化为北京时间 (UTC+8) */
+const formatBJTime = (t: string | null | undefined, format = 'YYYY-MM-DD HH:mm:ss'): string => {
+  if (!t) return ''
+  return dayjs.utc(t).utcOffset(8).format(format)
+}
 import './ApiKey.css';
 
 interface ApiKey {
@@ -41,7 +51,7 @@ const ApiKey: React.FC = () => {
   }, []);
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleString();
+    return formatBJTime(dateString);
   };
 
   const toggleShowPassword = (id: number) => {

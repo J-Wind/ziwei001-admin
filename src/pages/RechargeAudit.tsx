@@ -2,6 +2,16 @@ import { useState, useEffect } from 'react'
 import { Button, Table, Modal, Form, message, Tag, Tabs, Space, Input } from 'antd'
 import { CheckOutlined, CloseOutlined, EyeOutlined } from '@ant-design/icons'
 import { adminRequest } from '../api'
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+
+dayjs.extend(utc)
+
+/** 格式化为北京时间 (UTC+8) */
+const formatBJTime = (t: string | null | undefined, format = 'YYYY-MM-DD HH:mm:ss'): string => {
+  if (!t) return ''
+  return dayjs.utc(t).utcOffset(8).format(format)
+}
 
 interface RechargeOrder {
   id: number
@@ -138,7 +148,7 @@ const RechargeAuditPage: React.FC = () => {
       dataIndex: 'created_at',
       key: 'created_at',
       width: 160,
-      render: (val: string) => val?.slice(0, 16),
+      render: (val: string) => formatBJTime(val, 'YYYY-MM-DD HH:mm'),
     },
     {
       title: '操作',
@@ -288,9 +298,9 @@ const RechargeAuditPage: React.FC = () => {
               <p><strong>处理人：</strong>{currentOrder.processed_by}</p>
             )}
             {currentOrder.processed_at && (
-              <p><strong>处理时间：</strong>{currentOrder.processed_at.slice(0, 16)}</p>
+              <p><strong>处理时间：</strong>{formatBJTime(currentOrder.processed_at, 'YYYY-MM-DD HH:mm')}</p>
             )}
-            <p><strong>申请时间：</strong>{currentOrder.created_at.slice(0, 16)}</p>
+            <p><strong>申请时间：</strong>{formatBJTime(currentOrder.created_at, 'YYYY-MM-DD HH:mm')}</p>
           </div>
         )}
       </Modal>
